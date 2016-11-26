@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<title>The Finder</title>
+
+		<!-- Path to your custom app styles-->
+		<link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css">
+		<style>
+		#map-page, #map-canvas { width: 100%; height: 100%; padding: 0; }
+		</style>
+		<link rel="stylesheet"  href="css/jquery.mobile.structure-1.4.5.min.css">
+		<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+		<link rel="stylesheet" href="css/jqm-icon-pack-fa.css">
+		 <script>
+			var userAgent = navigator.userAgent + '';
+			if (userAgent.indexOf('iPhone') > -1) {
+				document.write('<script src="js/lib/cordova-iphone.js"></sc' + 'ript>');
+				var mobile_system = 'iphone';
+			} else if (userAgent.indexOf('Android') > -1) {
+				document.write('<script src="js/lib/cordova-android.js"></sc' + 'ript>');
+				var mobile_system = 'android';
+			} else {
+				var mobile_system = '';
+			}
+		</script>		
+	</head>
+	<body>
+	   <div data-role="page" id="map-page" style="background: white">
+			<div data-role="header" style="text-shadow: none">
+			    <a href="finder.html" data-role="button" data-icon="back">Back</a>
+				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
+			</div><!-- /header -->
+			<div data-role="content" style="text-shadow: none">
+				<div id="map-canvas"></div>
+			</div><!-- /content -->
+		</div><!-- /page -->
+		<script src="scripts/jquery.js"></script>
+		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
+		<script type="text/javascript" src="scripts/script.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbFu7ia5JFL1WGLlBMo67LQSfEMWN8F-U&libraries=places"></script>
+        
+
+	</body>
+</html>

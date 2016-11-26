@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<title>The Finder</title>
+
+		<!-- Path to your custom app styles-->
+		<link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet"  href="css/jquery.mobile.structure-1.4.5.min.css">
+		<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+		<link rel="stylesheet" href="css/jqm-icon-pack-fa.css">
+         <script>
+			var userAgent = navigator.userAgent + '';
+			if (userAgent.indexOf('iPhone') > -1) {
+				document.write('<script src="js/lib/cordova-iphone.js"></sc' + 'ript>');
+				var mobile_system = 'iphone';
+			} else if (userAgent.indexOf('Android') > -1) {
+				document.write('<script src="js/lib/cordova-android.js"></sc' + 'ript>');
+				var mobile_system = 'android';
+			} else {
+				var mobile_system = '';
+			}
+		</script>
+		<!-- your scripts here -->
+		
+	</head>
+	<body>
+	   <div data-role="page" id="loginpage" style="background: white">
+			<div data-role="header" style="text-shadow: none">
+			    <a href="index.html" data-role="button" data-icon="refresh">Refresh</a>
+				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
+			</div><!-- /header -->
+			<div data-role="content" class="ui-content">
+			<h1 class="mc-text-center">Welcome!</h1>
+				<p2 class="mc-text-center">Please Log In </p2>
+				</br>
+				<form method="post" action="#loginpage" data-ajax="true">
+				<input type="text" name="username" id="username" placeholder="Username"/>
+				<input type="password" id=password name="password" placeholder="Password"/>
+				<button onclick="login()" data-inline="true" data-theme="b">Sign in</button>
+				</form>
+				<div>
+					<p><strong> Or, Sign up to use</strong></p>
+					<a href="#signuppage" data-role="button"> 
+						<button>Sign Up</button>
+					</a>
+				</div>
+				</div><!-- /content -->
+		</div><!-- /page -->
+
+	<div data-role="page" id="signuppage" style="background: white">
+			<div data-role="header" style="text-shadow: none">
+			    <a href="index.html" data-role="button" data-icon="back">Back</a>
+				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
+			</div><!-- /header -->
+			<div data-role="content" class="ui-content">
+			<h1>Sign Up</h1>
+				<form method="post" action="#signuppage" data-ajax="true">
+				<input type="text" name="firstname" id="firstname" placeholder="Firstname"/>
+				<input type="email" id="email" name="email" placeholder="Email"/>
+				<input type="text" id="username" name="username" placeholder="Username"/>
+				<input type="password" id="password" name="password" placeholder="Password"/>
+				<input type="tel" id="telephone" name="telephone" placeholder="Phone Number"/>
+				<button onclick="addUser()" data-inline="true" data-theme="b">Sign up</button>
+				</form>
+				</div><!-- /content -->
+		</div><!-- /page -->
+
+
+		<script src="scripts/jquery.js"></script>
+		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
+		<script type="text/javascript">
+        function loginComplete(xhr,status){
+                if(status!="success"){
+                    divStatus.innerHTML="error sending request";
+                    return;
+                }
+                divStatus=xhr.responseText;
+                var obj=JSON.parse(xhr.responseText);
+                if(obj.result==0){
+                    divStatus=obj.message;
+                }else{
+                    divStatus.innerHTML= "Log in Success";
+
+                }
+                window.location="finder.html";
+
+            currentObject=null;
+            }
+            
+            function login()
+            {
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+
+                //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=1&username="+username+"&password="+password,{async:true,complete:loginComplete});
+                alert("usersAjax.php?cmd=1&username="+username+"&password="+password);
+
+                $.ajax("usersAjax.php?cmd=1&username="+username+"&password="+password,
+                    {async:true,complete:loginComplete}
+                    );
+            
+            }
+        
+        </script>
+		<script type="text/javascript">
+	            var currentObject=null;
+	        /**
+	        * callback function for add user method
+	        */
+	        function addUserComplete(xhr,status){
+	            if(status!="success"){
+	                divStatus.innerHTML="error sending request";
+	                return;
+	            }
+	            divStatus=xhr.responseText;
+	            var obj=JSON.parse(xhr.responseText);
+	            if(obj.result==0){
+	                divStatus.innerHTML = obj.message;
+	            }else{
+	                divStatus.innerHTML = "User added";
+	                }
+	            window.location="finder.html";
+
+	            currentObject=null;
+	        }
+	        /**
+	        *makes a AJAX call to server to add user
+	        */
+	        function addUser(){
+	            var firstname = document.getElementById("firstname").value;
+	            var email = document.getElementById("email").value;
+	            var username = document.getElementById("username").value;
+	            var password = document.getElementById("password").value; 
+	            var phonenumber = document.getElementById("telephone").value;
+
+	           // $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=2&name="+name+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,{async:true,complete:loginComplete});
+	            $.ajax("usersAjax.php?cmd=2&firstname="+firstname+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,
+                    {async:true,complete:loginComplete}
+                    );
+	            } 
+	        </script>
+	        
+
+	</body>
+</html>
