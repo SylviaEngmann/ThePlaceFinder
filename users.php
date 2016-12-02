@@ -20,7 +20,7 @@ class user extends adb{
 
     /*This function takes in the entered parameters and enters them in the database*/
 	function addUser($firstname,$email,$username,$password,$telephone){
-		$strQuery="insert into users
+		$strQuery="insert into user
 						(firstname,email,username,password,phonenumber)
 						VALUES('$firstname','$email','$username',MD5('$password'),'$telephone')";
 		return $this->query($strQuery);
@@ -31,14 +31,14 @@ class user extends adb{
 	*@return boolean true if successful, else false
 	*/
 	function getUser($filter=false){
-		$strQuery="select username,phonenumber from users";
+		$strQuery="select username,phonenumber from user";
 		if($filter!=false){
 			$strQuery=$strQuery . " where $filter";
 		}
 		return $this->query($strQuery);
 	}
 	function getUserLogin($username,$password){
-		$strQuery="select uid,username,password from users where
+		$strQuery="select uid,username,password from user where
 					username = '$username' and password =MD5('$password')";
 
 		return $this->query($strQuery);

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<title>The Finder</title>
+
+		<!-- Path to your custom app styles-->
+		<link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet"  href="css/jquery.mobile.structure-1.4.5.min.css">
+		<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css">
+		<link rel="stylesheet" href="css/jqm-demos.css">
+		<link rel="stylesheet" href="css/jqm-icon-pack-fa.css">
+		<style type="text/css">
+			html { height: 100% }
+			body { height: 100%; margin: 0; padding: 0 }
+				#map-canvas { height: 100% }
+		</style>
+		<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVryDWNQM25T1r_CnU3lpwQz78m-MsX1c&libraries=places"></script>-->
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9vMGnGG0QHDZEWiFLkBvL5a54nDmav8c&libraries=places"></script>
+		<script type="text/javascript">
+		//navigator.geolocation.getCurrentPosition(function(){}, function(){},{});
+		navigator.geolocation.getCurrentPosition(onSuccess,onError,{enableHighAccuracy: true});
+
+			function onSuccess(position) {
+				//load map with current position
+				var myLatlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+
+				var mapOptions = {zoom: 12,center: myLatlng}
+				var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+				//Places request
+				var request ={
+					location: myLatlng,
+					radius: '500',
+					types: ['atm']};
+
+			var service = new google.maps.places.PlacesService(map);
+			service.nearbySearch(request, callback); 
+			
+			function callback(results, status){
+				if(status == google.maps.places.PlacesServiceStatus.OK){
+					for(var i = 0; i< results.length; i++){
+						var place = results[i];
+						createMarker(results[i]);
+											}
+				}
+			}
+			function createMarker(place){
+				var placeLoc = place.geometry.location;
+				var marker = new google.maps.Marker({
+							map: map,
+							position: place.geometry.location
+						});
+			}
+		}
+			function onError(error){
+				alert('code: ' + error.code + '\n' +'message: ' + error.message + '\n');
+				};
+		google.maps.event.addDomListener(window, 'load');
+		</script>
+		<script>
+			var userAgent = navigator.userAgent + '';
+			if (userAgent.indexOf('iPhone') > -1) {
+				document.write('<script src="js/lib/cordova-iphone.js"></sc' + 'ript>');
+				var mobile_system = 'iphone';
+			} else if (userAgent.indexOf('Android') > -1) {
+				document.write('<script src="js/lib/cordova-android.js"></sc' + 'ript>');
+				var mobile_system = 'android';
+			} else {
+				var mobile_system = '';
+			}
+		</script>
+    		
+	</head>
+	<body>
+	   <div data-role="page" class="ui-responsive-panel" id="landingPage" style="background: white">
+	   	<div data-role="header" style="text-shadow: none">		
+			    <h1>The Finder</h1>
+			    <a href="finder.html" data-role="button" data-icon="refresh" class="ui-icon-refresh ui-nodisc-icon ui-alt-icon ui-btn-right">Refresh</a>
+    
+			</div><!-- /header -->
+			<div data-role="content" style="text-shadow: none">
+		<div id="map-canvas" style= "height :50%; width:50%;"></div>
+			</div><!-- /content -->
+			</div><!-- /page -->
+			
+		<script src="scripts/jquery.js"></script>
+		<script src="scripts/index2.js"></script>
+		<!--<script src="scripts/script.js"></script>-->
+		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+		<script src="cordova.js"></script>
+		<script src="scripts/platformOverrides.js"></script>
+        
+
+	</body>
+</html>

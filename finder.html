@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta name="format-detection" content="telephone=no">
 		<meta name="msapplication-tap-highlight" content="no">
@@ -12,91 +12,60 @@
 		<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css">
 		<link rel="stylesheet" href="css/jqm-demos.css">
 		<link rel="stylesheet" href="css/jqm-icon-pack-fa.css">
-         <script>
+		<script>
 			var userAgent = navigator.userAgent + '';
 			if (userAgent.indexOf('iPhone') > -1) {
-				document.write('<script src="js/lib/cordova-iphone.js"></sc' + 'ript>');
+				document.write('<script src="scripts/cordova-iphone.js"></sc' + 'ript>');
 				var mobile_system = 'iphone';
 			} else if (userAgent.indexOf('Android') > -1) {
-				document.write('<script src="js/lib/cordova-android.js"></sc' + 'ript>');
+				document.write('<script src="scripts/cordova-android.js"></sc' + 'ript>');
 				var mobile_system = 'android';
 			} else {
 				var mobile_system = '';
 			}
 		</script>
-		<script>
-		$( document ).on( "pagecreate", "#demo-page", function() {
-
-			$( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
-				if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
-					if ( e.type === "swipeleft" ) {
-						$( "#right-panel" ).panel( "open" );
-					} else if ( e.type === "swiperight" ) {
-						$( "#left-panel" ).panel( "open" );
-					}
-				}
-			});
-		});
-    </script>
-	<style>
-		#demo-page :not(INPUT):not(TEXTAREA) {
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			-o-user-select: none;
-			user-select: none;
-		}
-		/* Content styling. */
-		dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
-		dt { font-size: 2em; font-weight: bold; }
-		dt span { font-size: .5em; color: #777; margin-left: .5em; }
-		dd { font-size: 1.25em;	margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
-		.back-btn { float: right; margin: 0 2em 1em 0; }
-	</style>		
+    		
 	</head>
 	<body>
 	   <div data-role="page" class="ui-responsive-panel" id="landingPage" style="background: white">
-	   	<div data-role="header" style="text-shadow: none">
-	   			<a href="#left-panel" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>		
+	   	<div data-role="header" style="text-shadow: none">		
 			    <h1>The Finder</h1>
 			    <a href="finder.html" data-role="button" data-icon="refresh" class="ui-icon-refresh ui-nodisc-icon ui-alt-icon ui-btn-right">Refresh</a>
     
 			</div><!-- /header -->
 			<div data-role="content" style="text-shadow: none">
-				<div id="gmap_canvas"></div>
-			</div><!-- /content -->
-
-			<div data-role="panel" id="left-panel" data-theme="a">
-				<p1>Where do you want to find?</p1>
+			<p1>Where do you want to find?</p1>
 				<label for="search-basic">Enter a place:</label>
-				<input type="search" name="search" id="searc-basic" value="" /> 
-			
-				<ul data-role="listview">
-					<li><a href="#map-page" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a></li>
-					<li><a href="#map-page" class="ui-btn ui-icon-shopping-cart ui-btn-icon-left">Hotels</a></li>
-					<li><a href="#map-page" class="ui-btn ui-icon-shopping-cart ui-btn-icon-left">Shops</a></li>
-					<li><a href="#map-page" class="ui-btn ui-icon-cutlery ui-btn-icon-left">Restaurants</a></li>
-					<li><a href="#map-page" class="ui-btn ui-icon-credit-card ui-btn-icon-left">ATM's</a></li>
-					<li><a href="#map-page" class="ui-btn ui-icon-hospital-o ui-btn-icon-left">Hospitals</a></li>
-				</ul>	
-			</div><!--/panel -->
+				<input type="search" name="search" id="searc-basic" value="" />
+				<div> 
+					<a href="#map-page" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+					<a href="#map-page" class="ui-btn ui-icon-shopping-cart ui-btn-icon-left">Hotels</a>
+					<a href="shops.html" class="ui-btn ui-icon-shopping-cart ui-btn-icon-left">Shops</a>
+					<a href="restaurants.html" class="ui-btn ui-icon-cutlery ui-btn-icon-left">Restaurants</a>
+					<a href="atms.html" class="ui-btn ui-icon-credit-card ui-btn-icon-left">ATM's</a>
+					<a href="hospitals.html" class="ui-btn ui-icon-hospital-o ui-btn-icon-left">Hospitals</a>
+				</div>
+			</div><!-- /content -->
+			</div><!-- /page -->
 
-			<div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
-
-		    	<p>Right push panel.</p>
-				<a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Close</a>
-
-    		</div><!-- /panel -->
-		</div><!-- /page -->
+		<div data-role="page" id="map-page" style="background: white">
+	   	<div data-role="header" style="text-shadow: none">		
+			    <h1>The Finder</h1>
+			    <a href="finder.html" data-role="button" data-icon="refresh" class="ui-icon-refresh ui-nodisc-icon ui-alt-icon ui-btn-right">Refresh</a>
+    
+			</div><!-- /header -->
+		<div data-role="content" style="text-shadow: none">
+		<div id="map-canvas" style= "height :50%; width:50%;"></div>
+			</div><!-- /content -->
+			</div><!-- /page -->
 
 		
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/index2.js"></script>
-		<script type="text/javascript" src="scripts/script.js"></script>
+		<!--<script src="scripts/script.js"></script>-->
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
-		<script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbFu7ia5JFL1WGLlBMo67LQSfEMWN8F-U&libraries=places"></script>
+		<!--<script src="scripts/cordova.js"></script>-->
+		<script src="scripts/platformOverrides.js"></script>
         
 
 	</body>
