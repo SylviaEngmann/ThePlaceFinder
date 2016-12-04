@@ -143,5 +143,7 @@ function createMarker(obj) {
     infos.push(infowindow);
 }
 
+
 // initialization
 google.maps.event.addDomListener(window, 'load', initialize);
+};

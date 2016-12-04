@@ -70,6 +70,9 @@
   <plugin name="phonegap-plugin-barcodescanner"/>
   <plugin name="cordova-plugin-splashscreen"/>
   <plugin name="cordova-plugin-contacts"  />
+  <plugin name="phonegap-plugin-push"/>
+  <plugin name="cordova-plugin-statusbar"/>
+  <plugin name="cordova-plugin-console"/>
   <plugin name="cordova-plugin-media-capture" />
   <plugin name="cordova-plugin-compat" />
   <plugin name="cordova-plugin-file"  />

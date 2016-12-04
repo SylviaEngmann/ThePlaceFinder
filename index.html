@@ -16,10 +16,10 @@
          <script>
 			var userAgent = navigator.userAgent + '';
 			if (userAgent.indexOf('iPhone') > -1) {
-				document.write('<script src="js/lib/cordova-iphone.js"></sc' + 'ript>');
+				document.write('<script src="scripts/cordova-iphone.js"></sc' + 'ript>');
 				var mobile_system = 'iphone';
 			} else if (userAgent.indexOf('Android') > -1) {
-				document.write('<script src="js/lib/cordova-android.js"></sc' + 'ript>');
+				document.write('<script src="scripts/cordova-android.js"></sc' + 'ript>');
 				var mobile_system = 'android';
 			} else {
 				var mobile_system = '';
@@ -29,12 +29,12 @@
 		
 	</head>
 	<body>
-	   <div data-role="page" id="loginpage" style="background: white">
-			<div data-role="header" style="text-shadow: none">
+	   <div data-role="page" id="loginpage" style="background:#66bb6a">
+			<div data-role="header" style="text-shadow: none; background:#81c784"> 
 			    <a href="index.html" data-role="button" data-icon="refresh">Refresh</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
 			</div><!-- /header -->
-			<div data-role="content" class="ui-content">
+			<div data-role="content" class="ui-content ">
 			<h1 class="mc-text-center">Welcome!</h1>
 				<p2 class="mc-text-center">Please Log In </p2>
 				</br>
@@ -43,16 +43,14 @@
 				<input type="password" id=password name="password" placeholder="Password"/>
 				<button onclick="login()" data-inline="true" data-theme="b">Sign in</button>
 				</form>
+				<a href="#adminloginpage" data-role="button" data-inline="true" data-theme="b">Admin Sign in</a>
 				<div>
-					<p><strong> Or, Sign up to use</strong></p>
-					<a href="#signuppage" data-role="button"> 
-						<button>Sign Up</button>
-					</a>
+					<a href="#signuppage" data-role="button" data-inline="true" data-theme="b">Sign Up</a>
 				</div>
 				</div><!-- /content -->
 		</div><!-- /page -->
 
-	<div data-role="page" id="signuppage" style="background: white">
+	<div data-role="page" id="signuppage" style="background:#66bb6a">
 			<div data-role="header" style="text-shadow: none">
 			    <a href="index.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
@@ -70,11 +68,60 @@
 				</div><!-- /content -->
 		</div><!-- /page -->
 
+<div data-role="page" id="adminloginpage" style="background:#66bb6a">
+			<div data-role="header" style="text-shadow: none">
+			    <a href="index.html" data-role="button" data-icon="back">Back</a>
+				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
+			</div><!-- /header -->
+			<div data-role="content" class="ui-content">
+			<h1>Admin Log In</h1>
+				<form method="post" action="#adminloginpage" data-ajax="true">
+				<input type="text" name="username" id="username" placeholder="Username"/>
+				<input type="password" id=password name="password" placeholder="Password"/>
+				<button onclick="adminLogin()" data-inline="true" data-theme="b">Log In</button>
+				</form>
+				</div><!-- /content -->
+		</div><!-- /page -->
+
 
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
+		<script type="text/javascript">
+        function adminLoginComplete(xhr,status){
+                if(status!="success"){
+                    divStatus.innerHTML="error sending request";
+                    return;
+                }
+                divStatus=xhr.responseText;
+                var obj=JSON.parse(xhr.responseText);
+                if(obj.result==0){
+                    divStatus=obj.message;
+                }else{
+                    divStatus.innerHTML= "Log in Success";
+
+                }
+                window.location="admin.html";
+
+            currentObject=null;
+            }
+            
+            function adminLogin()
+            {
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+
+                $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=3&username="+username+"&password="+password,
+                	{async:true,complete:adminLoginComplete}
+                	);
+
+               // $.ajax("usersAjax.php?cmd=3&username="+username+"&password="+password,{async:true,complete:adminLoginComplete});
+            
+            }
+        
+        </script>
+		
 		<script type="text/javascript">
         function loginComplete(xhr,status){
                 if(status!="success"){
@@ -99,12 +146,11 @@
                 var username = document.getElementById("username").value;
                 var password = document.getElementById("password").value;
 
-                //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=1&username="+username+"&password="+password,{async:true,complete:loginComplete});
-                //alert("usersAjax.php?cmd=1&username="+username+"&password="+password);
+                $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=1&username="+username+"&password="+password,
+                	{async:true,complete:loginComplete}
+                	);
 
-                $.ajax("usersAjax.php?cmd=1&username="+username+"&password="+password,
-                    {async:true,complete:loginComplete}
-                    );
+                //$.ajax("usersAjax.php?cmd=1&username="+username+"&password="+password,{async:true,complete:loginComplete} );
             
             }
         
@@ -140,10 +186,11 @@
 	            var password = document.getElementById("password").value; 
 	            var phonenumber = document.getElementById("telephone").value;
 
-	           // $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=2&name="+name+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,{async:true,complete:loginComplete});
-	            $.ajax("usersAjax.php?cmd=2&firstname="+firstname+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,
-                    {async:true,complete:loginComplete}
-                    );
+	           $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=2&name="+name+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,
+	           	{async:true,complete:addUserComplete}
+	           	);
+
+	            //$.ajax("usersAjax.php?cmd=2&firstname="+firstname+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,{async:true,complete:addUserComplete});
 	            } 
 	        </script>
 	        

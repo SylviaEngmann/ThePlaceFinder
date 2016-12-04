@@ -25,6 +25,13 @@ class user extends adb{
 						VALUES('$firstname','$email','$username',MD5('$password'),'$telephone')";
 		return $this->query($strQuery);
 		}
+	function addAdmin($email,$username,$password){
+		$strQuery="insert into user
+						(email,username,password)
+						VALUES('$email','$username',MD5('$password'))";
+		return $this->query($strQuery);
+		}
+		
 	/**
 	*gets user records based on the filter
 	*@param string mixed condition to filter. If  false, then filter will not be applied
@@ -39,6 +46,12 @@ class user extends adb{
 	}
 	function getUserLogin($username,$password){
 		$strQuery="select uid,username,password from user where
+					username = '$username' and password =MD5('$password')";
+
+		return $this->query($strQuery);
+	}
+	function getAdminLogin($username,$password){
+		$strQuery="select uid,username,password from admin where
 					username = '$username' and password =MD5('$password')";
 
 		return $this->query($strQuery);
