@@ -27,47 +27,56 @@
     		
 	</head>
 	<body>
-	   <div data-role="page" class="ui-responsive-panel" id="landingPage" style="background:#66bb6a">
-	   	<div data-role="header" style="text-shadow: none">		
+	   <div data-role="page" class="ui-responsive-panel" id="landingPage" style="background:#80cbc4">
+	   	<div data-role="header" style="text-shadow: none">
+	   	<a href = "index.html" class="glyphicon glyphicon-log-out">Logout</a>		
 			    <h1>The Finder</h1>
 			    <a href="finder.html" data-role="button" data-icon="refresh" class="ui-icon-refresh ui-nodisc-icon ui-alt-icon ui-btn-right">Refresh</a>
     
 			</div><!-- /header -->
-			<div data-role="content" style="background:#66bb6a">
+			<div data-role="content" style="background:#80cbc4">
 			<p1>Where do you want to find?</p1>
 				<label for="search-basic">Enter a place:</label>
 				<input type="search" name="search" id="searc-basic" value="" />
 				<div> 
-					<a href="map.html" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
-				<a href="hotels2.html" class="ui-btn ui-icon-shopping-cart ui-btn-icon-left">Hotels</a>
-					<a href="shops.html" class="ui-btn ui-icon-shopping-cart ui-btn-icon-left">Shops</a>
-					<a href="restaurants2.html" class="ui-btn ui-icon-cutlery ui-btn-icon-left">Restaurants</a>
-					<a href="banks.html" class="ui-btn ui-icon-credit-card ui-btn-icon-left">Banks</a>
-					<a href="atms.html" class="ui-btn ui-icon-credit-card ui-btn-icon-left">ATM's</a>
-					<a href="hospitals.html" class="ui-btn ui-icon-hospital-o ui-btn-icon-left">Hospitals</a>
+					<button onclick="hotels()" class="ui-btn ui-icon-home ui-btn-icon-left">Hotels</button>
+					<button onclick="shops()" class="ui-btn ui-icon-shopping-cart ui-btn-icon-left">Shops</button>
+					<button onclick="restaurants()" class="ui-btn ui-icon-cutlery ui-btn-icon-left">Restaurants</button>
+					<button onclick="banks()" class="ui-btn ui-icon-credit-card ui-btn-icon-left">Banks</button>
+					<button onclick="atms()" class="ui-btn ui-icon-credit-card ui-btn-icon-left">ATM's</button>
+					<button onclick="hospitals()" class="ui-btn ui-icon-hospital-o ui-btn-icon-left">Hospitals</a>
+					<button onclick="fuelstations()" class="ui-btn ui-icon-hospital-o ui-btn-icon-left">Fuel Station</button>
 				</div>
 			</div><!-- /content -->
 			</div><!-- /page -->
 
-		<div data-role="page" id="map-page" style="background: white">
-	   	<div data-role="header" style="text-shadow: none">		
-			    <h1>The Finder</h1>
-			    <a href="finder.html" data-role="button" data-icon="refresh" class="ui-icon-refresh ui-nodisc-icon ui-alt-icon ui-btn-right">Refresh</a>
-    
-			</div><!-- /header -->
-		<div data-role="content" style="text-shadow: none">
-		<div id="map-canvas" style= "height :50%; width:50%;"></div>
-			</div><!-- /content -->
-			</div><!-- /page -->
-
-		
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/index2.js"></script>
-		<!--<script src="scripts/script.js"></script>-->
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
-		<!--<script src="scripts/cordova.js"></script>-->
 		<script src="scripts/platformOverrides.js"></script>
-        
+		<script type="text/javascript">
+			function hotels(){
+				 window.location="hotels.html";
+			}
+			function shops(){
+				 window.location="shops.html";
+			}
+			function restaurants(){
+				 window.location="restaurants.html";
+			}
+			function banks(){
+				 window.location="banks.html";
+			}
+			function atms(){
+				 window.location="atms.html";
+			}
+			function hospitals(){
+				 window.location="hospitals.html";
+			}
+			function fuelstations(){
+				 window.location="fuelstation.html";
+			}
+        </script>
 
 	</body>
 </html>

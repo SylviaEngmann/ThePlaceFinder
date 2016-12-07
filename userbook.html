@@ -29,59 +29,57 @@
 		
 	</head>
 	<body>
-	   <div data-role="page" id="loginpage" style="background:#80cbc4 ">
+	   <div data-role="page" id="hotelbook" style="background:#80cbc4 ">
 			<div data-role="header" 
 				style="text-shadow: none; background:#80cbc4"> 
-			    <a href="index.html" data-role="button" data-icon="refresh">Refresh</a>
+			    <a href="hotels.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content ">
-			<h1 class="mc-text-center" style="font-family:'Tangerine',serif; font-size:48px;text-shadow: 4px 4px 4px #aaa;">Welcome!</h1>
-			<p2 class="mc-text-center" style="font-family: 'Font Name', serif;">Please Log In </p2>
+			<h1 class="mc-text-center" style="font-family:'Tangerine',serif; font-size:48px;text-shadow: 4px 4px 4px #aaa;">Welcome To Your Booking Page!</h1>
+			<p2 class="mc-text-center" style="font-family:'Tangerine', serif; font-size:28px;">Please Enter your details</p2>
 				</br>
-				<form method="post" action="#loginpage">
+				<form method="post" action="#hotelbook">
 				<input type="text" name="username" id="username" placeholder="Username"/>
 				<input type="password" id=password name="password" placeholder="Password"/>
-				<button onclick="login()" data-inline="true" data-theme="b">Sign in</button>
+				<button onclick="hotelBook()" data-inline="true" data-theme="b">Make your booking</button>
 				</form>
-				<div>
-					<a href="#signuppage" data-role="button" data-inline="true" data-theme="b">Sign Up</a>
-				</div>
-				<div>
-					<a href="#adminloginpage" data-role="button" data-inline="true" data-theme="b">Admin Sign in</a>
-				</div>
 				</div><!-- /content -->
 		</div><!-- /page -->
 
-		<div data-role="page" id="signuppage" style="background:#80cbc4">
+		<div data-role="page" id="atmrequest" style="background:#80cbc4">
 			<div data-role="header" style="text-shadow: none">
-			    <a href="index.html" data-role="button" data-icon="back">Back</a>
+			    <a href="atms.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content">
-			<h1>Sign Up</h1>
-				<form method="post" action="#signuppage">
+			<h1 class="mc-text-center" style="font-family:'Tangerine',serif; font-size:30px;text-shadow: 4px 4px 4px #aaa;">Welcome To The Atm Card Request Page!</h1>
+			<p2 class="mc-text-center" style="font-family:'Tangerine', serif; font-size:28px;">Please Enter your details</p2>
+				<form method="post" action="#atmrequest">
 				<input type="text" name="firstname" id="firstname" placeholder="Firstname"/>
 				<input type="email" id="email" name="email" placeholder="Email"/>
 				<input type="text" id="username" name="username" placeholder="Username"/>
 				<input type="password" id="password" name="password" placeholder="Password"/>
 				<input type="tel" id="telephone" name="telephone" placeholder="Phone Number"/>
-				<button onclick="addUser()" data-inline="true" data-theme="b">Sign up</button>
+				<button onclick="makeRequest()" data-inline="true" data-theme="b">Make Request</button>
 				</form>
 				</div><!-- /content -->
 		</div><!-- /page -->
-
-		<div data-role="page" id="adminloginpage" style="background:#80cbc4">
+		<div data-role="page" id="appointments" style="background:#80cbc4">
 			<div data-role="header" style="text-shadow: none">
-			    <a href="index.html" data-role="button" data-icon="back">Back</a>
+			    <a href="atms.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content">
-			<h1>Admin Log In</h1>
-				<form method="post" action="#adminloginpage">
-				<input type="text" name="username" id="username" placeholder="Username"/>
-				<input type="password" id=password name="password" placeholder="Password"/>
-				<button onclick="adminLogin()" data-inline="true" data-theme="b">Log In</button>
+			<h1 class="mc-text-center" style="font-family:'Tangerine',serif; font-size:30px;text-shadow: 4px 4px 4px #aaa;">Welcome To The Hospital Appointment Booking Page</h1>
+			<p2 class="mc-text-center" style="font-family:'Tangerine', serif; font-size:28px;">Please Enter your details</p2>
+				<form method="post" action="#appointments">
+				<input type="text" name="firstname" id="firstname" placeholder="Firstname"/>
+				<input type="email" id="email" name="email" placeholder="Email"/>
+				<input type="text" id="username" name="username" placeholder="Username"/>
+				<input type="password" id="password" name="password" placeholder="Password"/>
+				<input type="tel" id="telephone" name="telephone" placeholder="Phone Number"/>
+				<button onclick="bookAppt()" data-inline="true" data-theme="b">Book Appointment</button>
 				</form>
 				</div><!-- /content -->
 		</div><!-- /page -->
@@ -92,23 +90,23 @@
 		<!--<script type="text/javascript" src="scripts/cordova.js"></script>-->
 		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
 		<script type="text/javascript">
-		    function adminLogin(){window.location="admin.html";}
-		    function login(){window.location="finder.html";}
-
-        /*
         function adminLoginComplete(xhr,status){
                 if(status!="success"){
                     //divStatus.innerHTML="error logging in";
                     alert("error logging in");
                      return;
                 }
+                //divStatus=xhr.responseText;
                 var obj=JSON.parse(xhr.responseText);
                 if(obj.result==0){
                     alert(obj.message);
+                    //divStatus.innerHTML=obj.message;
                 }else{
                 	 alert("Log in Success");
+                    //divStatus.innerHTML= "Log in Success";
                 }
                 window.location="admin.html";
+
             currentObject=null;
             }
             
@@ -149,41 +147,6 @@
                 $.ajax("login.php?username="+username+"&password="+password,{async:true,complete:loginComplete});
             
             }
-	        var currentObject=null;
-	        /**
-	        * callback function for add user method
-	        *
-	        function addUserComplete(xhr,status){
-	            if(status!="success"){
-	                alert("error sending request");
-	                return;
-	            }
-	            //divStatus=xhr.responseText;
-	            var obj=JSON.parse(xhr.responseText);
-	            if(obj.result==0){
-	                alert(obj.message);
-	            }else{
-	                alert("User added");
-	                }
-	            window.location="finder.html";
-
-	            currentObject=null;
-	        }
-	        /**
-	        *makes a AJAX call to server to add user
-	        *
-	        function addUser(){
-	            var firstname = document.getElementById("firstname").value;
-	            var email = document.getElementById("email").value;
-	            var username = document.getElementById("username").value;
-	            var password = document.getElementById("password").value; 
-	            var phonenumber = document.getElementById("telephone").value;
-
-	          // $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/signup.php?name="+name+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,{async:true,complete:addUserComplete});
-	           //alert("signup.php?firstname="+firstname+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber);
-
-	            $.ajax("signup.php?firstname="+firstname+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,{async:true,complete:addUserComplete});
-	            } */
 	        </script>
 	</body>
 </html>

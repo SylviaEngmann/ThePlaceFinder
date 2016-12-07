@@ -26,7 +26,7 @@ class user extends adb{
 		return $this->query($strQuery);
 		}
 	function addAdmin($email,$username,$password){
-		$strQuery="insert into user
+		$strQuery="insert into admin
 						(email,username,password)
 						VALUES('$email','$username',MD5('$password'))";
 		return $this->query($strQuery);
