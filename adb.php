@@ -2,7 +2,7 @@
 /**
 *Database connection helper
 */
-include_once("setting.php");
+include_once("setting1.php");
 
 /**
 * Database connection helper class

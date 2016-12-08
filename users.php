@@ -37,13 +37,6 @@ class user extends adb{
 	*@param string mixed condition to filter. If  false, then filter will not be applied
 	*@return boolean true if successful, else false
 	*/
-	function getUser($filter=false){
-		$strQuery="select username,phonenumber from user";
-		if($filter!=false){
-			$strQuery=$strQuery . " where $filter";
-		}
-		return $this->query($strQuery);
-	}
 	function getUserLogin($username,$password){
 		$strQuery="select uid,username,password from user where
 					username = '$username' and password =MD5('$password')";

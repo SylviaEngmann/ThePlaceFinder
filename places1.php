@@ -11,7 +11,9 @@ return $xmlStr;
 }
 
 // Opens a connection to a MySQL server
-$connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
+//$connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
+$connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
+
 if ($connection->connect_errno) {
   exit();
 }
@@ -42,5 +44,4 @@ while ($row=$result->fetch_assoc()){
 
 // End XML file
 echo '</places>';
-
 ?>

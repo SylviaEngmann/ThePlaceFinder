@@ -32,7 +32,7 @@
 	   <div data-role="page" id="hotelbook" style="background:#80cbc4 ">
 			<div data-role="header" 
 				style="text-shadow: none; background:#80cbc4"> 
-			    <a href="finder.html" data-role="button" data-icon="back">Back</a>
+			    <a href="http://52.89.116.249/~sylvia.engmann/theplacefinder/finder.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content ">
@@ -43,11 +43,8 @@
 				<input type="text" name="hotel" id="hotel" placeholder="Hotel Name"/>
 				<input type="text" name="firstname" id="firstname" placeholder="First Name"/>
 				<input type="text" name="lastname" id="lastname" placeholder="Last Name"/>
-
-				<label for="datein">Date-in:(yyyy-mm-dd)</label>
-				<input id="datein" data-inline="true"/>
-				<!--<input type="date" data-role="date" id="datein" data-inline="true">-->
-
+				<label for="datein">Date-in:</label>
+				<input type="date" data-role="date" id="datein" data-inline="true">
 				<input type="number" name="numdays" id="numdays" placeholder="Number of Days to spend"/>
 				<button onclick="hotelBook()" data-inline="true" data-theme="b">Make your booking</button>
 				</form>
@@ -64,10 +61,8 @@
 			<p2 class="mc-text-center" style="font-family:'Tangerine', serif; font-size:28px;">Please Enter your details</p2>
 				<form method="post" action="#atmrequest">
 				<input type="text" id="bank" name="bank" placeholder="Bank Name"/>
-
-				<input type="text" name="firstname" id="firstname" placeholder="First Name"/>
-				<input type="text" name="lastname" id="lastname" placeholder="Last Name"/>
-
+				<input type="text" name="firstname" id="fname" placeholder="First Name"/>
+				<input type="text" name="lastname" id="lname" placeholder="Last Name"/>
 				<input type="number" id="acnum" name="acnum" placeholder="Account Number"/>
 				<button onclick="makeRequest()" data-inline="true" data-theme="b">Make Request</button>
 				</form>
@@ -76,29 +71,22 @@
 
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
-		<!--<script type="text/javascript" src="scripts/cordova.js"></script>-->
 		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
 		<script type="text/javascript">
         function hotelBookComplete(xhr,status){
                 if(status!="success"){
-                    //divStatus.innerHTML="error logging in";
-                    alert("Error");
+               divStatus.innerHTML="error while adding user";
                      return;
                 }
-                //divStatus=xhr.responseText;
                 var obj=JSON.parse(xhr.responseText);
                 if(obj.result==0){
                     alert(obj.message);
-                    //divStatus.innerHTML=obj.message;
                 }else{
-                	 alert("Booking Done");
-                    //divStatus.innerHTML= "Log in Success";
+                	 alert(obj.message);
                 }
-                window.location="finder.html";
-
-            currentObject=null;
+                window.location="http://52.89.116.249/~sylvia.engmann/theplacefinder/finder.html";
             }
-            
+       
             function hotelBook()
             {
             	var hotel = document.getElementById("hotel").value;
@@ -107,10 +95,10 @@
                 var datein = document.getElementById("datein").value;
                 var numdays = document.getElementById("numdays").value;
 
-                //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/booking.php?cmd=1&hotelname="+hotelname+"&firstname="+firstname+"&lastname"+lastname+"&datein"+datein+"&numdays"+numdays,{async:true,complete:hotelBookComplete});
-
-               $.ajax("booking.php?cmd=1&hotelname="+hotelname+"&firstname="+firstname+"&lastname"+lastname+"&datein"+datein+"&numdays"+numdays,
-               	{async:true,complete:hotelBookComplete});
+                //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/booking.php?cmd=1&hotelname="+hotelname+"&firstname="+firstname+"&lastname="+lastname+"&datein="+datein+"&numdays="+numdays,{async:true,complete:hotelBookComplete});
+                var url ="http://52.89.116.249/~sylvia.engmann/theplacefinder/booking.php?cmd=1&hotel="+hotel+"&firstname="+firstname+"&lastname="+lastname+"&datein="+datein+"&numdays="+numdays; 
+                //alert(url);
+               $.ajax(url,{async:true,complete:hotelBookComplete});
             
             }
         function makeRequestComplete(xhr,status){
@@ -123,25 +111,23 @@
                 if(obj.result==0){
                     alert(obj.message);
                 }else{
-                    alert("ATM Request Succesful");
-
+                	 alert(obj.message);
                 }
-                window.location="finder.html";
-
-            currentObject=null;
+                window.location="http://52.89.116.249/~sylvia.engmann/theplacefinder/finder.html";
             }
             
             function makeRequest()
             {
             	var bank = document.getElementById("bank").value;
-                var firstname = document.getElementById("firstname").value;
-                var lastname = document.getElementById("lastname").value;
+                var firstname = document.getElementById("fname").value;
+                var lastname = document.getElementById("lname").value;
                 var acnum = document.getElementById("acnum").value;
 
-               //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/atmrequest.php?cmd=1&bank="+bank+"&firstname="+firstname+"&lastname"+lastname+"&acnum"+acnum,{async:true,complete:makeRequestComplete});
+               //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/atmrequest.php?cmd=1&bank="+bank+"&firstname="+firstname+"&lastname="+lastname+"&acnum="+acnum,{async:true,complete:makeRequestComplete});
 
-                $.ajax("atmrequest.php?cmd=1&bank="+bank+"&firstname="+firstname+"&lastname"+lastname+"&acnum"+acnum,
-                	{async:true,complete:makeRequestComplete});
+               var url = "http://52.89.116.249/~sylvia.engmann/theplacefinder/atmrequest.php?cmd=1&bank="+bank+"&firstname="+firstname+"&lastname="+lastname+"&acnum="+acnum;
+               //alert(url);
+                $.ajax(url,{async:true,complete:makeRequestComplete});
             
             }
 	        </script>

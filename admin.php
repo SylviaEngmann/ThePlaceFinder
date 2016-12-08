@@ -10,10 +10,7 @@ if(!isset($_REQUEST['username'])){
 		include_once("users.php");
 		$obj=new user();
 		$row = $obj->getAdminLogin($username,$password);
-		if($row=false){
-			echo "Error. User not found";
-			exit();
-		}
+		if($row)
         $result = $obj->fetch();
 if(($result['username'] == $username)&&($result['password'] == $password))
 		{

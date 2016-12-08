@@ -25,8 +25,8 @@ if(!isset($_REQUEST['hotel'])){
 		$datein=$_REQUEST['datein'];
 		$numdays=$_REQUEST['numdays'];	
           
- $connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
- //$connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
+ //$connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
+ $connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
 
 if ($connection->connect_errno) {
   exit();
@@ -46,9 +46,8 @@ else{
  }
 
  function getBookings(){
-
- $connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
- //$connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
+ //$connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
+ $connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
 
 if ($connection->connect_errno) {
   exit();
@@ -58,10 +57,17 @@ $result = $connection->query($query);
 if ($result==false) {
   echo '{"result":0,"message":"Could not find booking"}';
 }
-   while($row=$reult->fetch_assoc()){
-      echo '{"result":1,"booking":[';
-      		echo json_encode($row);
-      echo"]}";
-   }
- }  
+		$row = $result->fetch_assoc();
+        echo '{"result":1 , "booking":[';
+        while($row){
+            echo json_encode($row);
+            $row = $result->fetch_assoc();
+            if($row!=false){
+                echo ",";
+            }
+        }
+        echo "]}";       
+
+ }
+  
 ?>

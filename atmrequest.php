@@ -24,8 +24,8 @@ if(!isset($_REQUEST['bank'])){
 		$acnum=$_REQUEST['acnum'];
 		
           
- $connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
- //$connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
+ //$connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
+ $connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
 
 if ($connection->connect_errno) {
   exit();
@@ -44,25 +44,25 @@ else{
     }
  }
  function getReq(){
-
- $connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
- //$connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
-
+ //$connection=new mysqlI('localhost', 'root', '','theplacefinder_db');
+ $connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
 if ($connection->connect_errno) {
   exit();
 }
-
 $query = "select * from atm_requests";
 $result = $connection->query($query);
 if ($result==false) {
   echo '{"result":0,"message":"Could not find requests"}';
 }
-
-   while($row=$reult->fetch_assoc()){
-      echo '{"result":1,"request":[';
-      		echo json_encode($row);
-      echo"]}";
-   }
-  }
-    
+   $row = $result->fetch_assoc();
+        echo '{"result":1 , "requests":[';
+        while($row){
+            echo json_encode($row);
+            $row = $result->fetch_assoc();
+            if($row!=false){
+                echo ",";
+            }
+        }
+        echo "]}"; 
+ }      
 ?>

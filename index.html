@@ -32,7 +32,7 @@
 	   <div data-role="page" id="loginpage" style="background:#80cbc4 ">
 			<div data-role="header" 
 				style="text-shadow: none; background:#80cbc4"> 
-			    <a href="index.html" data-role="button" data-icon="refresh">Refresh</a>
+			    <a href="http://52.89.116.249/~sylvia.engmann/theplacefinder/index.html" data-role="button" data-icon="refresh">Refresh</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content ">
@@ -55,16 +55,17 @@
 
 		<div data-role="page" id="signuppage" style="background:#80cbc4">
 			<div data-role="header" style="text-shadow: none">
+				<a href="http://52.89.116.249/~sylvia.engmann/theplacefinder/index.html" data-role="button" data-icon="refresh">Back</a>
 			    <a href="index.html" data-role="button" data-icon="back">Back</a>
-				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
+				<h1>The Finder</h1><a href="#" data-icon="gear"></a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content">
 			<h1>Sign Up</h1>
 				<form method="post" action="#signuppage">
 				<input type="text" name="firstname" id="firstname" placeholder="Firstname"/>
 				<input type="email" id="email" name="email" placeholder="Email"/>
-				<input type="text" id="username" name="username" placeholder="Username"/>
-				<input type="password" id="password" name="password" placeholder="Password"/>
+				<input type="text" id="uname" name="username" placeholder="Username"/>
+				<input type="password" id="pword" name="password" placeholder="Password"/>
 				<input type="tel" id="telephone" name="telephone" placeholder="Phone Number"/>
 				<button onclick="addUser()" data-inline="true" data-theme="b">Sign up</button>
 				</form>
@@ -73,8 +74,8 @@
 
 		<div data-role="page" id="adminloginpage" style="background:#80cbc4">
 			<div data-role="header" style="text-shadow: none">
-			    <a href="index.html" data-role="button" data-icon="back">Back</a>
-				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
+			   <a href="http://52.89.116.249/~sylvia.engmann/theplacefinder/index.html" data-role="button" data-icon="refresh">Refresh</a>
+				<h1>The Finder</h1><a href="#" data-icon="gear"></a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content">
 			<h1>Admin Log In</h1>
@@ -86,19 +87,35 @@
 				</div><!-- /content -->
 		</div><!-- /page -->
 
-
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
-		<!--<script type="text/javascript" src="scripts/cordova.js"></script>-->
 		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
 		<script type="text/javascript">
-		    function adminLogin(){window.location="admin.html";}
-		    function login(){window.location="finder.html";}
-
-        /*
+		function loginComplete(xhr,status){
+                if(status!="success"){
+                    alert("error sending request");
+                    return;
+                }
+                var obj=JSON.parse(xhr.responseText);
+                if(obj.result==0){
+                    alert(obj.message);
+                }else{
+                	//alert(obj.message);
+                    alert("Log in Success");
+                }
+                window.location="http://52.89.116.249/~sylvia.engmann/theplacefinder/finder.html";
+            }
+            
+            function login()
+            {
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+               $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=1&username="+username+"&password="+password,{async:true,complete:loginComplete});
+               // $.ajax("usersAjax.php?cmd=1&username="+username+"&password="+password,{async:true,complete:loginComplete});
+            }
+	    
         function adminLoginComplete(xhr,status){
                 if(status!="success"){
-                    //divStatus.innerHTML="error logging in";
                     alert("error logging in");
                      return;
                 }
@@ -106,84 +123,45 @@
                 if(obj.result==0){
                     alert(obj.message);
                 }else{
-                	 alert("Log in Success");
+                	 alert(obj.message);
                 }
-                window.location="admin.html";
-            currentObject=null;
-            }
+                window.location="http://52.89.116.249/~sylvia.engmann/theplacefinder/admin.html";
+     }
             
             function adminLogin()
             {
                 var username = document.getElementById("username").value;
                 var password = document.getElementById("password").value;
 
-                //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/admin.php?username="+username+"&password="+password,{async:true,complete:adminLoginComplete});
-               $.ajax("admin.php?username="+username+"&password="+password,{async:true,complete:adminLoginComplete});
+                $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=3&username="+username+"&password="+password,{async:true,complete:adminLoginComplete});
+               //$.ajax("usersAjax.php?cmd=3&username="+username+"&password="+password,{async:true,complete:adminLoginComplete});
             
             }
-        function loginComplete(xhr,status){
-                if(status!="success"){
-                    alert("error sending request");
-                    return;
-                }
-                //divStatus=xhr.responseText;
-                var obj=JSON.parse(xhr.responseText);
-                if(obj.result==0){
-                    alert(obj.message);
-                }else{
-                    alert("Log in Success");
-
-                }
-                window.location="finder.html";
-
-            currentObject=null;
-            }
-            
-            function login()
-            {
-                var username = document.getElementById("username").value;
-                var password = document.getElementById("password").value;
-
-               //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/login.php?username="+username+"&password="+password,{async:true,complete:loginComplete});
-
-                $.ajax("login.php?username="+username+"&password="+password,{async:true,complete:loginComplete});
-            
-            }
-	        var currentObject=null;
-	        /**
-	        * callback function for add user method
-	        *
 	        function addUserComplete(xhr,status){
 	            if(status!="success"){
 	                alert("error sending request");
 	                return;
 	            }
-	            //divStatus=xhr.responseText;
 	            var obj=JSON.parse(xhr.responseText);
 	            if(obj.result==0){
 	                alert(obj.message);
 	            }else{
-	                alert("User added");
+	               	alert(obj.message);
 	                }
-	            window.location="finder.html";
+	            window.location="http://52.89.116.249/~sylvia.engmann/theplacefinder/index.html";
 
-	            currentObject=null;
 	        }
-	        /**
-	        *makes a AJAX call to server to add user
-	        *
 	        function addUser(){
 	            var firstname = document.getElementById("firstname").value;
 	            var email = document.getElementById("email").value;
-	            var username = document.getElementById("username").value;
-	            var password = document.getElementById("password").value; 
+	            var username = document.getElementById("uname").value;
+	            var password = document.getElementById("pword").value; 
 	            var phonenumber = document.getElementById("telephone").value;
 
-	          // $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/signup.php?name="+name+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,{async:true,complete:addUserComplete});
-	           //alert("signup.php?firstname="+firstname+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber);
-
-	            $.ajax("signup.php?firstname="+firstname+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,{async:true,complete:addUserComplete});
-	            } */
+	          //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=2&name="+name+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber,{async:true,complete:addUserComplete});
+				var url = "http://52.89.116.249/~sylvia.engmann/theplacefinder/usersAjax.php?cmd=2&firstname="+firstname+"&email="+email+"&username="+username+"&password="+password+"&phonenumber="+phonenumber;
+	            $.ajax(url,{async:true,complete:addUserComplete});
+	            } 
 	        </script>
 	</body>
 </html>

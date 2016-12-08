@@ -5,7 +5,7 @@
 		<meta name="msapplication-tap-highlight" content="no">
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 		<title>The Finder</title>
-		<!-- Path to your custom app styles-->
+
 		<link rel="stylesheet"  href="css/jquery.mobile-1.4.5.min.css">
 		<link rel="stylesheet"  href="css/jquery.mobile.structure-1.4.5.min.css">
 		<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css">
@@ -23,72 +23,35 @@
 			} else {
 				var mobile_system = '';
 			}
-		</script>
-		<script>
-			$(function() {
-    			$( "[data-role='navbar']" ).navbar();
-    			$( "[data-role='header'], [data-role='footer']" ).toolbar();
-			});
-			// Update the contents of the toolbars
-			$( document ).on( "pagecontainerchange", function() {
-    		// Each of the four pages in this demo has a data-title attribute
-    		// which value is equal to the text of the nav button
-    		// For example, on first page: <div data-role="page" data-title="Info">
-    		var current = $( ".ui-page-active" ).jqmData( "title" );
-    			// Change the heading
-    		$( "[data-role='header'] h1" ).text( current );
-    		// Remove active class from nav buttons
-    		$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
-    		// Add active class to current nav button
-    		$( "[data-role='navbar'] a" ).each(function() {
-       		 if ( $( this ).text() === current ) {
-            $( this ).addClass( "ui-btn-active" );
-        	}
-    		});
-		});
-		</script>
-				
+		</script>		
 	</head>
 	<body>
-	<div data-role="page" id="landingPage">
-	   	<div data-role="header" style="background: #b2dfdb;">
+	<div data-role="page" id="landingPage" style="background:#80cbc4">
+	<div data-role="header" style="background:#b2dfdb;">
+	   	<a href = "http://52.89.116.249/~sylvia.engmann/theplacefinder/index.html" class="glyphicon glyphicon-log-out">Logout</a>		
 			    <h1>The Finder</h1>
-			    <a href="finder.html" data-role="button" data-icon="refresh" class="ui-icon-refresh ui-nodisc-icon ui-alt-icon ui-btn-right">Refresh</a> 
-			<div data-role="navbar" style="background:#b2dfdb">
-        	<ul>
-        		<li><a href="#addPlace" data-prefetch="true" data-transition="fade">Place Add</a></li>
-            	<li><a href="#viewMap" data-prefetch="true" data-transition="fade">View Map</a></li>
-            	<li><a href="#viewBankRequest" data-prefetch="true" data-transition="fade">Bank Request</a></li>
-            	<li><a href="#viewHotelBookings" data-prefetch="true" data-transition="fade">Hotel Bookings</a></li>
-        	</ul>
-    	</div><!-- /navbar -->
+		<a href="admin.html" data-role="button" data-icon="refresh" class="ui-icon-refresh ui-nodisc-icon ui-alt-icon ui-btn-right">Refresh</a> 
 		</div><!-- /header -->
 		<div data-role="content" style="background:#80cbc4">
 			<h1 class="mc-text-center" style="font-family:'Tangerine',serif; font-size:48px;text-shadow: 4px 4px 4px #aaa;">Welcome Admin!</h1>
+				<button><a href="#addPlace">Add A Place</a></button>
+				<button><a href="#viewBankRequest">View ATM Requests</a></button>
+				<button><a href="#viewHotelBookings">View Bookings</a></button>
 			</div><!-- /content -->
 			</div><!-- /page -->
 
 		<div data-role="page" id="addPlace" style="background:#80cbc4">
 		<div data-role="header" style="background:#b2dfdb;text-shadow: none">
-			    <a href="admin.html" data-role="button" data-icon="back">Back</a>
+			    <a href="http://52.89.116.249/~sylvia.engmann/theplacefinder/admin.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
-			<div data-role="navbar" style="background:#b2dfdb">
-        	<ul>
-            	<li><a href="#landingPage" data-prefetch="true" data-transition="fade">Admin Home</a></li>
-            	<li><a href="#viewMap" data-prefetch="true" data-transition="fade">View Map</a></li>
-            	<li><a href="#viewBankRequest" data-prefetch="true" data-transition="fade">Bank Requests</a></li>
-            	<li><a href="#viewHotelBookings" data-prefetch="true" data-transition="fade">Hotel Bookings</a></li>
-        	</ul>
-    	</div><!-- /navbar -->
 			</div><!-- /header -->
-
 			<div data-role="content" style="text-shadow: none">
 			<h1 class="mc-text-center" style="font-family:'Aref+Ruqaa',serif; font-size:28px;">Add a Place</h1>
 			<form method="post" action="#addPlace">
 				<input type="text" name="name" id="name" placeholder="Name of Place"/>
 				<input type="text" id="address" name="address" placeholder="Address"/>
-				<input type="text" id="lat" name="lat" placeholder="Latitude"/>
-				<input type="text" id="lng" name="lng" placeholder="Longitude"/>	
+				<input type="number" id="lat" name="lat" placeholder="Latitude"/>
+				<input type="number" id="lng" name="lng" placeholder="Longitude"/>	
 				<div class="ui-field-contain">
    					<label for="select-native-1">Select Type:</label>
     				<select name="select-native-1" id="type">
@@ -106,82 +69,55 @@
 				</div><!-- /content -->
 			</div><!-- /page -->
 
-	   <div data-role="page" id="viewMap">
-	   	<div data-role="header" style="background: #b2dfdb;overflow:hidden;">
-			    <h1>The Finder</h1>
-			    <a href="finder.html" data-role="button" data-icon="refresh" class="ui-icon-refresh ui-nodisc-icon ui-alt-icon ui-btn-right">Refresh</a> 
-			<div data-role="navbar" style="background:#b2dfdb">
-        	<ul>
-        		<li><a href="#landingPage" data-prefetch="true" data-transition="fade">Admin Page</a></li>
-            	<li><a href="#addPlace" data-prefetch="true" data-transition="fade">Add Place</a></li>
-            	<li><a href="#viewBankRequest" data-prefetch="true" data-transition="fade">Bank Request</a></li>
-            	<li><a href="#viewHotelBookings" data-prefetch="true" data-transition="fade">Hotel Bookings</a></li>
-        	</ul>
-    	</div><!-- /navbar -->
-		</div><!-- /header -->
-			<div data-role="content" style="background:#80cbc4">
-			<!--<p1><strong>Hello Admin</strong></p1>-->
-			<h1 class="mc-text-center" style="font-family:'Aref+Ruqaa',serif; font-size:28px;">Map</h1>
-			</div><!-- /content -->
-			</div><!-- /page -->
-
 		<div data-role="page" id="viewBankRequest" style="background:#80cbc4">
 	   	<div data-role="header" style="background: #b2dfdb;text-shadow: none">
-			    <a href="admin.html" data-role="button" data-icon="back">Back</a>
+			    <a href="http://52.89.116.249/~sylvia.engmann/theplacefinder/admin.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
-			<div data-role="navbar" style="background:#b2dfdb">
-        	<ul>
-            	<li><a href="#landingPage" data-prefetch="true" data-transition="fade">Admin Home</a></li>
-            	<li><a href="#addPlace" data-prefetch="true" data-transition="fade">Add Place</a></li>
-            	<li><a href="#viewMap" data-prefetch="true" data-transition="fade">View Map</a></li>
-            	<li><a href="#viewHotelBookings" data-prefetch="true" data-transition="fade">Hotel Bookings</a></li>
-        	</ul>
-    		</div><!-- /navbar -->
 			</div><!-- /header -->
 			<div data-role="content" style="text-shadow: none">
 			<h1 class="mc-text-center" style="font-family:'Aref+Ruqaa',serif; font-size:28px;">View Bank Requests</h1>
+			<button onclick="getAtmRequest()" class="btn">View ATM Requests</button>
 				</div><!-- /content -->
 			</div><!-- /page -->
 		
 		<div data-role="page" id="viewHotelBookings" style="background: #80cbc4">
 	   	<div data-role="header" style="background: #b2dfdb;text-shadow: none">
-			    <a href="admin.html" data-role="button" data-icon="back">Back</a>
+			    <a href="http://52.89.116.249/~sylvia.engmann/theplacefinder/admin.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
-			<div data-role="navbar" style="background:#b2dfdb">
-        	<ul>
-            	<li><a href="#landingPage" data-prefetch="true" data-transition="fade">Admin Home</a></li>
-            	<li><a href="#addPlace" data-prefetch="true" data-transition="fade">Add Place</a></li>
-            	<li><a href="#viewMap" data-prefetch="true" data-transition="fade">View Map</a></li>
-            	<li><a href="#viewBankRequest" data-prefetch="true" data-transition="fade">Bank Requests</a></li>
-        	</ul>
-    		</div><!-- /navbar -->	
 			</div><!-- /header -->
 			<div data-role="content" style="text-shadow: none">
-				<h1 class="mc-text-center" style="font-family:'Aref+Ruqaa',serif; font-size:28px;">View Hotel Requests</h1>
-				</div><!-- /content -->
+				<h1 class="mc-text-center" style="font-family:'Aref+Ruqaa',serif; font-size:28px;">View Hotel Booking Requests</h1>
+           	     <button onclick="getBookRequest()" class="btn">View Bookings</button>
+			</div><!-- /content -->
 			</div><!-- /page -->
 		
-		
+		<div data-role="page" id="approve" style="background:#80cbc4">
+	   	<div data-role="header" style="background:#b2dfdb;overflow:hidden;">
+	   			<a href="http://52.89.116.249/~sylvia.engmann/theplacefinder/admin.html" data-role="button" data-icon="back">Back</a>
+			    <h1>The Finder</h1>
+			    <a href="finder.html" data-role="button" data-icon="refresh" class="ui-icon-refresh ui-nodisc-icon ui-alt-icon ui-btn-right">Refresh</a> 
+				</div><!-- /header -->
+			<div data-role="content" style="background:#80cbc4">
+			<p2 style="font-family:'Aref+Ruqaa',serif; font-size:15px;"> Approved </p2>
+			</div><!-- /content -->
+			</div><!-- /page -->
+
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
-		<script src="scripts/cordova.js"></script>
 		<script src="scripts/platformOverrides.js"></script>
-		<script type = "text/javascript">
+		<script type ="text/javascript">
 			function addPlaceComplete(xhr,status){
 	            if(status!="success"){
 	                alert("error sending request");
 	                return;
 	            }
-	            //divStatus=xhr.responseText;
 	            var obj=JSON.parse(xhr.responseText);
 	            if(obj.result==0){
 	                alert(obj.message);
 	            }else{
 	                alert("Place added");
 	                }
-	            window.location="admin.html";
-
-	            currentObject=null;
+	            window.location="http://52.89.116.249/~sylvia.engmann/theplacefinder/admin.html";
 	        }
 	        /**
 	        *makes a AJAX call to server to add user
@@ -193,12 +129,73 @@
 	            var lng = document.getElementById("lng").value; 
 	            var type = document.getElementById("type").value;
 
-	          // $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/places.php?name="+name+"&address="+address+"&lat="+lat+"&lng="+lng+"&type="+type,{async:true,complete:addPlaceComplete});
-	           
-	            $.ajax("places.php?name="+name+"&address="+address+"&lat="+lat+"&lng="+lng+"&type="+type,{async:true,complete:addPlaceComplete});
+	           $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/places.php?name="+name+"&address="+address+"&lat="+lat+"&lng="+lng+"&type="+type,{async:true,complete:addPlaceComplete});
+	           // $.ajax("places.php?name="+name+"&address="+address+"&lat="+lat+"&lng="+lng+"&type="+type,{async:true,complete:addPlaceComplete});
 	            } 
-		</script>
-        
 
+	            function getAtmRequestComplete(xhr,status){
+        		if(status!="success"){
+          			alert("Error fetching atm requests");
+          		return;
+        		}
+        	else{
+         		 var obj=JSON.parse(xhr.responseText);
+          			if(obj.result==0){
+            	alert(obj.message);
+          		}
+          	else{
+              var result="";
+              var atmrequest=obj.atmrequest;
+              var length=obj.atmrequest.length;
+
+              while(length>0){
+                  result+="<p>ATM Request Details: "+atmrequest[length-1].bank+"<span>"+atmrequest[length-1].firstname+" "+atmrequest[length-1].lastname+'</span>'+atmrequest[length-1].acnum+"</br</p><button><a href ='#approve'>Approve</a></button>";
+                length-=1;
+                }
+              }
+                $("#viewBankRequest").html(result);
+
+         }
+      }
+
+   function getAtmRequest(){
+  		var url ="http://52.89.116.249/~sylvia.engmann/theplacefinder/atmrequest.php?cmd=2";
+  		 $.ajax(url,{async:true,complete:getAtmComplete});
+  		 //var url ="atmrequest.php?cmd=2"; 
+         // $.ajax(url,{async:true,complete:getAtmRequestComplete});
+           } 
+	 function getBookRequestComplete(xhr,status){
+        if(status!="success"){
+          alert("Error during fetching booking requests");
+          return;
+        }
+        else{
+          var obj=JSON.parse(xhr.responseText);
+          	if(obj.result==0){
+            	alert(obj.message);
+          	}
+          	else{
+          
+              var result="";
+              var booking=obj.booking;
+              var length=obj.booking.length;
+
+              while(length>0){
+                  result+="<p>Booking Details: "+booking[length-1].hotel+"<span>"+booking[length-1].firstname+" "+booking[length-1].lastname+'</span>'+booking[length-1].datein+"</br"+booking[length-1].numdays+"</p><button><a href ='#approve'>Approve</a></button>";
+                length-=1;
+                }
+              }
+                $("#viewHotelBookings").html(result);
+
+         }
+      }
+
+   function getBookRequest(){
+   			var url ="http://52.89.116.249/~sylvia.engmann/theplacefinder/booking.php?cmd=2";
+  			 $.ajax(url,{async:true,complete:getBookRequestComplete});
+  			//var url ="booking.php?cmd=2"; 
+                //alert(url);
+           } 
+		</script>
 	</body>
 </html>
