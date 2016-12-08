@@ -32,16 +32,23 @@
 	   <div data-role="page" id="hotelbook" style="background:#80cbc4 ">
 			<div data-role="header" 
 				style="text-shadow: none; background:#80cbc4"> 
-			    <a href="hotels.html" data-role="button" data-icon="back">Back</a>
+			    <a href="finder.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content ">
 			<h1 class="mc-text-center" style="font-family:'Tangerine',serif; font-size:48px;text-shadow: 4px 4px 4px #aaa;">Welcome To Your Booking Page!</h1>
 			<p2 class="mc-text-center" style="font-family:'Tangerine', serif; font-size:28px;">Please Enter your details</p2>
 				</br>
-				<form method="post" action="#hotelbook">
-				<input type="text" name="username" id="username" placeholder="Username"/>
-				<input type="password" id=password name="password" placeholder="Password"/>
+				<form method="post" action="#hotelbook">				
+				<input type="text" name="hotel" id="hotel" placeholder="Hotel Name"/>
+				<input type="text" name="firstname" id="firstname" placeholder="First Name"/>
+				<input type="text" name="lastname" id="lastname" placeholder="Last Name"/>
+
+				<label for="datein">Date-in:(yyyy-mm-dd)</label>
+				<input id="datein" data-inline="true"/>
+				<!--<input type="date" data-role="date" id="datein" data-inline="true">-->
+
+				<input type="number" name="numdays" id="numdays" placeholder="Number of Days to spend"/>
 				<button onclick="hotelBook()" data-inline="true" data-theme="b">Make your booking</button>
 				</form>
 				</div><!-- /content -->
@@ -49,51 +56,33 @@
 
 		<div data-role="page" id="atmrequest" style="background:#80cbc4">
 			<div data-role="header" style="text-shadow: none">
-			    <a href="atms.html" data-role="button" data-icon="back">Back</a>
+			    <a href="finder.html" data-role="button" data-icon="back">Back</a>
 				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
 			</div><!-- /header -->
 			<div data-role="content" class="ui-content">
 			<h1 class="mc-text-center" style="font-family:'Tangerine',serif; font-size:30px;text-shadow: 4px 4px 4px #aaa;">Welcome To The Atm Card Request Page!</h1>
 			<p2 class="mc-text-center" style="font-family:'Tangerine', serif; font-size:28px;">Please Enter your details</p2>
 				<form method="post" action="#atmrequest">
-				<input type="text" name="firstname" id="firstname" placeholder="Firstname"/>
-				<input type="email" id="email" name="email" placeholder="Email"/>
-				<input type="text" id="username" name="username" placeholder="Username"/>
-				<input type="password" id="password" name="password" placeholder="Password"/>
-				<input type="tel" id="telephone" name="telephone" placeholder="Phone Number"/>
+				<input type="text" id="bank" name="bank" placeholder="Bank Name"/>
+
+				<input type="text" name="firstname" id="firstname" placeholder="First Name"/>
+				<input type="text" name="lastname" id="lastname" placeholder="Last Name"/>
+
+				<input type="number" id="acnum" name="acnum" placeholder="Account Number"/>
 				<button onclick="makeRequest()" data-inline="true" data-theme="b">Make Request</button>
 				</form>
 				</div><!-- /content -->
 		</div><!-- /page -->
-		<div data-role="page" id="appointments" style="background:#80cbc4">
-			<div data-role="header" style="text-shadow: none">
-			    <a href="atms.html" data-role="button" data-icon="back">Back</a>
-				<h1>The Finder</h1><a href="#" data-icon="gear">Settings</a>
-			</div><!-- /header -->
-			<div data-role="content" class="ui-content">
-			<h1 class="mc-text-center" style="font-family:'Tangerine',serif; font-size:30px;text-shadow: 4px 4px 4px #aaa;">Welcome To The Hospital Appointment Booking Page</h1>
-			<p2 class="mc-text-center" style="font-family:'Tangerine', serif; font-size:28px;">Please Enter your details</p2>
-				<form method="post" action="#appointments">
-				<input type="text" name="firstname" id="firstname" placeholder="Firstname"/>
-				<input type="email" id="email" name="email" placeholder="Email"/>
-				<input type="text" id="username" name="username" placeholder="Username"/>
-				<input type="password" id="password" name="password" placeholder="Password"/>
-				<input type="tel" id="telephone" name="telephone" placeholder="Phone Number"/>
-				<button onclick="bookAppt()" data-inline="true" data-theme="b">Book Appointment</button>
-				</form>
-				</div><!-- /content -->
-		</div><!-- /page -->
-
 
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
 		<!--<script type="text/javascript" src="scripts/cordova.js"></script>-->
 		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
 		<script type="text/javascript">
-        function adminLoginComplete(xhr,status){
+        function hotelBookComplete(xhr,status){
                 if(status!="success"){
                     //divStatus.innerHTML="error logging in";
-                    alert("error logging in");
+                    alert("Error");
                      return;
                 }
                 //divStatus=xhr.responseText;
@@ -102,24 +91,29 @@
                     alert(obj.message);
                     //divStatus.innerHTML=obj.message;
                 }else{
-                	 alert("Log in Success");
+                	 alert("Booking Done");
                     //divStatus.innerHTML= "Log in Success";
                 }
-                window.location="admin.html";
+                window.location="finder.html";
 
             currentObject=null;
             }
             
-            function adminLogin()
+            function hotelBook()
             {
-                var username = document.getElementById("username").value;
-                var password = document.getElementById("password").value;
+            	var hotel = document.getElementById("hotel").value;
+                var firstname = document.getElementById("firstname").value;
+                var lastname = document.getElementById("lastname").value;
+                var datein = document.getElementById("datein").value;
+                var numdays = document.getElementById("numdays").value;
 
-                //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/admin.php?username="+username+"&password="+password,{async:true,complete:adminLoginComplete});
-               $.ajax("admin.php?username="+username+"&password="+password,{async:true,complete:adminLoginComplete});
+                //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/booking.php?cmd=1&hotelname="+hotelname+"&firstname="+firstname+"&lastname"+lastname+"&datein"+datein+"&numdays"+numdays,{async:true,complete:hotelBookComplete});
+
+               $.ajax("booking.php?cmd=1&hotelname="+hotelname+"&firstname="+firstname+"&lastname"+lastname+"&datein"+datein+"&numdays"+numdays,
+               	{async:true,complete:hotelBookComplete});
             
             }
-        function loginComplete(xhr,status){
+        function makeRequestComplete(xhr,status){
                 if(status!="success"){
                     alert("error sending request");
                     return;
@@ -129,7 +123,7 @@
                 if(obj.result==0){
                     alert(obj.message);
                 }else{
-                    alert("Log in Success");
+                    alert("ATM Request Succesful");
 
                 }
                 window.location="finder.html";
@@ -137,14 +131,17 @@
             currentObject=null;
             }
             
-            function login()
+            function makeRequest()
             {
-                var username = document.getElementById("username").value;
-                var password = document.getElementById("password").value;
+            	var bank = document.getElementById("bank").value;
+                var firstname = document.getElementById("firstname").value;
+                var lastname = document.getElementById("lastname").value;
+                var acnum = document.getElementById("acnum").value;
 
-               //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/login.php?username="+username+"&password="+password,{async:true,complete:loginComplete});
+               //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/atmrequest.php?cmd=1&bank="+bank+"&firstname="+firstname+"&lastname"+lastname+"&acnum"+acnum,{async:true,complete:makeRequestComplete});
 
-                $.ajax("login.php?username="+username+"&password="+password,{async:true,complete:loginComplete});
+                $.ajax("atmrequest.php?cmd=1&bank="+bank+"&firstname="+firstname+"&lastname"+lastname+"&acnum"+acnum,
+                	{async:true,complete:makeRequestComplete});
             
             }
 	        </script>
