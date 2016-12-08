@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" 
-  id="theFinder" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US" android-versionCode="1">
+  id="theFinder" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US" android-versionCode="1">
   <name>The Finder</name>
   <description>An application that helps users find locations of various places on a map</description>
   <author href="http://cordova.io" email="sylvia.engmann8@gmail.com">Sylvia Engmann</author>

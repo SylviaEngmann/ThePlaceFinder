@@ -56,10 +56,35 @@ function addUser(){
 
 		$row=$obj->addUser($firstname,$email,$username,$password,$telephone);
 		if($row==true){
-			echo '{"result":1,"message":"User added"}';
+			echo '{"result":1,"message":"You haev been added"}';
 
-		}else{
-			echo '{"result":0,"message":"User not added"}';
+			$to='233278275106';
+    		$from="theFinder";
+    		$text="Sign Up Successful";
+    		$text= preg_replace('/\s+/', '%20', $text);
+    		$user = 'mobileapp';
+    		$password = 'foobar';
+
+  			$url='http://52.89.116.249:13013/cgi-bin/sendsms?username=mobileapp&password=foobar&to=to&from=from&text=text';
+
+        	$ch = curl_init();
+        	curl_setopt($ch, CURLOPT_URL, $url);
+        	curl_setopt($ch, CURLOPT_HEADER, 0);
+        	// Set so curl_exec returns the result instead of outputting it.
+        	curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+        	// Get the response and close the channel.
+        	$response = curl_exec($ch);
+       		echo $response;
+        	if ($response == 0){
+          	echo '{"result":1,"message":Message sent"}';
+        	}
+        	else{
+        	echo '{"result":0,"message":Message queued"}';
+        	}
+        	curl_close($ch);
+      		}
+		else{
+			echo '{"result":0,"message":"You have not been not added"}';
      }
  }
  function adminLogin(){
@@ -90,5 +115,4 @@ if(($result['username'] == $username)&&($result['password'] == $password))
                 echo '{"result":0,"message":"Error username or password is wrong"}';
             }
         }
-
 ?>
