@@ -25,33 +25,6 @@
 				var mobile_system = '';
 			}
 		</script>
-		<script type="text/javascript">
-		function inviteContacts(){
-			document.addEventListener("deviceready", onDeviceReady.bing(this),false);
-			function onDeviceReady() {
-			console.log(navigator.contacts);
-			var options = new ContactFindOptions();
-			options.filter = "*";
-			options.multiple = true;
-			options.desiredFields = [navigator.contacts.fieldType.id];
-			options.hasPhoneNumber = true;
-			var fields= [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.phoneNumber];
-			
-		navigator.contacts.find(fields,onSuccess,onError,options);
-		navigator.contacts.pickContact(function(contact){
-        	console.log('The following contact has been selected:' + JSON.stringify(contact));},function(err){console.log('Error: ' + err);});
-			}
-			var contactArray = [];
-			function onSuccess(contacts){
-			for (var i=0; i<contacts.length; i++) {
-        		if (contacts[i].displayName) {
-            		contactArray.push(contacts[i]);
-            	}}
-                alert(contactArray);}
-			function onError(contactError){
-				alert('Error finding contacts');};
-			}
-		</script>	
 	</head>
 	<body>
 	   <div data-role="page" id="hotelbook" style="background:#80cbc4 ">
@@ -99,6 +72,32 @@
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
 		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
 		<script type="text/javascript">
+		function inviteContacts(){
+			document.addEventListener("deviceready", onDeviceReady.bind(this),false);
+			function onDeviceReady() {
+			console.log(navigator.contacts);
+			var options = new ContactFindOptions();
+			options.filter = "*";
+			options.multiple = true;
+			options.desiredFields = [navigator.contacts.fieldType.id];
+			options.hasPhoneNumber = true;
+			var fields= [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.phoneNumber];
+			
+		navigator.contacts.find(fields,onSuccess,onError,options);
+		navigator.contacts.pickContact(function(contact){
+        	console.log('The following contact has been selected:' + JSON.stringify(contact));},function(err){console.log('Error: ' + err);});
+			}
+			var contactArray = [];
+			function onSuccess(contacts){
+			for (var i=0; i<contacts.length; i++) {
+        		if (contacts[i].displayName) {
+            		contactArray.push(contacts[i]);
+            	}}
+                alert(contactArray);}
+			function onError(contactError){
+				alert('Error finding contacts');};
+			}
+
         function hotelBookComplete(xhr,status){
                 if(status!="success"){
                divStatus.innerHTML="error while adding user";
