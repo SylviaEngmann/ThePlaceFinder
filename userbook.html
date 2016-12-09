@@ -27,11 +27,11 @@
 		</script>
 		<script type="text/javascript">
 		function inviteContacts(){
-			document.addEventListener("deviceready", onDeviceReady, false);
+			document.addEventListener("deviceready", onDeviceReady.bing(this),false);
 			function onDeviceReady() {
 			console.log(navigator.contacts);
 			var options = new ContactFindOptions();
-			options.filter = "";
+			options.filter = "*";
 			options.multiple = true;
 			options.desiredFields = [navigator.contacts.fieldType.id];
 			options.hasPhoneNumber = true;
@@ -41,10 +41,15 @@
 		navigator.contacts.pickContact(function(contact){
         	console.log('The following contact has been selected:' + JSON.stringify(contact));},function(err){console.log('Error: ' + err);});
 			}
+			var contactArray = [];
 			function onSuccess(contacts){
-				alert('Found'+contacts.length+'contacts.');};
+			for (var i=0; i<contacts.length; i++) {
+        		if (contacts[i].displayName) {
+            		contactArray.push(contacts[i]);
+            	}}
+                alert(contactArray);}
 			function onError(contactError){
-				alert('onError');};
+				alert('Error finding contacts');};
 			}
 		</script>	
 	</head>
