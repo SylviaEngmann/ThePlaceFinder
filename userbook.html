@@ -25,7 +25,32 @@
 				var mobile_system = '';
 			}
 		</script>
-		<!-- your scripts here -->
+		<script type="text/javascript">
+		function inviteContacts(){
+			document.addEventListener("deviceready", onDeviceReady, false);
+			function onDeviceReady() {
+			console.log(navigator.contacts);
+			}
+			function onSuccess(contacts){
+				alert('Found'+contacts.length+'contacts.');
+			};
+			function onError(contactError){
+				alert('onError');
+			};
+			var options = new ContactFindOptions();
+			options.filter = "";
+			options.multiple = true;
+			options.desiredFields = [navigator.contacts.fieldType.id];
+			options.hasPhoneNumber = true;
+			var fields= [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+			
+			navigator.contacts.find(contactFields,onSuccess,onError,options);
+
+			navigator.contacts.pickContact(function(contact){
+        	console.log('The following contact has been selected:' + JSON.stringify(contact));},function(err){console.log('Error: ' + err);});
+
+			}
+		</script>
 		
 	</head>
 	<body>
@@ -46,6 +71,7 @@
 				<label for="datein">Date-in:</label>
 				<input type="date" data-role="date" id="datein" data-inline="true">
 				<input type="number" name="numdays" id="numdays" placeholder="Number of Days to spend"/>
+				<button onclick="inviteContacts()" data-inline="true" data-theme="b">Invite A Contact</button>
 				<button onclick="hotelBook()" data-inline="true" data-theme="b">Make your booking</button>
 				</form>
 				</div><!-- /content -->
@@ -123,10 +149,7 @@
                 var lastname = document.getElementById("lname").value;
                 var acnum = document.getElementById("acnum").value;
 
-               //$.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/atmrequest.php?cmd=1&bank="+bank+"&firstname="+firstname+"&lastname="+lastname+"&acnum="+acnum,{async:true,complete:makeRequestComplete});
-
                var url = "http://52.89.116.249/~sylvia.engmann/theplacefinder/atmrequest.php?cmd=1&bank="+bank+"&firstname="+firstname+"&lastname="+lastname+"&acnum="+acnum;
-               //alert(url);
                 $.ajax(url,{async:true,complete:makeRequestComplete});
             
             }
