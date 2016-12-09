@@ -30,28 +30,23 @@
 			document.addEventListener("deviceready", onDeviceReady, false);
 			function onDeviceReady() {
 			console.log(navigator.contacts);
-			}
-			function onSuccess(contacts){
-				alert('Found'+contacts.length+'contacts.');
-			};
-			function onError(contactError){
-				alert('onError');
-			};
 			var options = new ContactFindOptions();
 			options.filter = "";
 			options.multiple = true;
 			options.desiredFields = [navigator.contacts.fieldType.id];
 			options.hasPhoneNumber = true;
-			var fields= [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+			var fields= [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.phoneNumber];
 			
-			navigator.contacts.find(contactFields,onSuccess,onError,options);
-
-			navigator.contacts.pickContact(function(contact){
+		navigator.contacts.find(fields,onSuccess,onError,options);
+		navigator.contacts.pickContact(function(contact){
         	console.log('The following contact has been selected:' + JSON.stringify(contact));},function(err){console.log('Error: ' + err);});
-
 			}
-		</script>
-		
+			function onSuccess(contacts){
+				alert('Found'+contacts.length+'contacts.');};
+			function onError(contactError){
+				alert('onError');};
+			}
+		</script>	
 	</head>
 	<body>
 	   <div data-role="page" id="hotelbook" style="background:#80cbc4 ">
