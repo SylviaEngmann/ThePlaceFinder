@@ -56,7 +56,8 @@ function addUser(){
 
 		$row=$obj->addUser($firstname,$email,$username,$password,$telephone);
 		if($row==true){
-			echo '{"result":1,"message":"You haev been added"}';
+			echo '{"result":1,"message":"You have been added"}';
+			echo ",";
 
 			$to='233278275106';
     		$from="theFinder";
