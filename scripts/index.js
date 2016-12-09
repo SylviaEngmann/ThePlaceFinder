@@ -37,4 +37,3 @@ function onBarcodeFail(error) {
          alert("Scanning failed: " + error);
 }
 })();
-

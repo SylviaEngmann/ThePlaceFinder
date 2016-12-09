@@ -8,6 +8,9 @@ switch($cmd){
 	case 2;
 	getBookings();
 	break;
+	case 3;
+	delBooking();
+	break;
 	default:
 	echo "wrong command";
 	break;
@@ -69,5 +72,21 @@ if ($result==false) {
         echo "]}";       
 
  }
-  
+ function delBooking(){
+ $connection=new mysqlI('localhost', 'sylvia.engmann', '9f1d6eedd1ff7ccc','dbms_sylvia.engmann');
+
+if ($connection->connect_errno) {
+  exit();
+}
+$query = "delete from booking where bid = '4'";
+$result = $connection->query($query);
+if ($result==false) {
+  echo '{"result":0,"message":"Could not find booking"}';
+}
+ else{
+ 	'{"result":1,"message":"booking removed"}';
+
+ }
+ }
+   
 ?>

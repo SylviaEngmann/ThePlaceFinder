@@ -100,9 +100,10 @@
 				</div><!-- /header -->
 			<div data-role="content" style="background:#80cbc4">
 			<p2 style="font-family:'Aref+Ruqaa',serif; font-size:15px;"> Approved </p2>
+			 <div id='remove'></div>
 			</div><!-- /content -->
 			</div><!-- /page -->
-			
+
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
 		<script src="scripts/platformOverrides.js"></script>
@@ -120,9 +121,6 @@
 	                }
 	            window.location="admin.html";
 	        }
-	        /**
-	        *makes a AJAX call to server to add user
-	        */
 	        function addPlace(){
 	            var name = document.getElementById("name").value;
 	            var address = document.getElementById("address").value;
@@ -131,10 +129,9 @@
 	            var type = document.getElementById("type").value;
 
 	           $.ajax("http://52.89.116.249/~sylvia.engmann/theplacefinder/places.php?name="+name+"&address="+address+"&lat="+lat+"&lng="+lng+"&type="+type,{async:true,complete:addPlaceComplete});
-	           // $.ajax("places.php?name="+name+"&address="+address+"&lat="+lat+"&lng="+lng+"&type="+type,{async:true,complete:addPlaceComplete});
-	            } 
+	           } 
 
-	            function getAtmRequestComplete(xhr,status){
+	        function getAtmRequestComplete(xhr,status){
         		if(status!="success"){
           			alert("Error fetching atm requests");
           		return;
@@ -150,7 +147,7 @@
               var length=obj.atmrequest.length;
 
               while(length>0){
-                  result+="<p> ATM Request Details: Bank Name:"+atmrequest[length-1].bank+"</br> Name: "+atmrequest[length-1].firstname+"</br>"+atmrequest[length-1].lastname+"</br> Account number : "+atmrequest[length-1].acnum+"</br></p><button><a href ='#approve'>Approve</a></button>";
+                  result+="<p> ATM Request Details: Bank Name </br>:"+atmrequest[length-1].bank+"</br> Name: "+atmrequest[length-1].firstname+"</br>"+atmrequest[length-1].lastname+"</br> Account number : "+atmrequest[length-1].acnum+"</br></p><button><a href ='#approve'>Approve</a></button>";
                 length-=1;
                 }
               }
@@ -161,10 +158,9 @@
 
    function getAtmRequest(){
   		var url ="http://52.89.116.249/~sylvia.engmann/theplacefinder/atmrequest.php?cmd=2";
-  		 $.ajax(url,{async:true,complete:getAtmComplete});
-  		 //var url ="atmrequest.php?cmd=2"; 
-         // $.ajax(url,{async:true,complete:getAtmRequestComplete});
-           } 
+  		 $.ajax(url,{async:true,complete:getAtmRequestComplete});
+           }
+            
 	 function getBookRequestComplete(xhr,status){
         if(status!="success"){
           alert("Error during fetching booking requests");
@@ -195,7 +191,27 @@
    			var url ="http://52.89.116.249/~sylvia.engmann/theplacefinder/booking.php?cmd=2";
   			 $.ajax(url,{async:true,complete:getBookRequestComplete});
   			//var url ="booking.php?cmd=2"; 
-           } 
+           }
+
+        document.getElementById("remove").onclick = function(){
+			var url ="http://52.89.116.249/~sylvia.engmann/theplacefinder/booking.php?cmd=4";
+  			 $.ajax(url,{async:true,complete:removeComplete});
+  			
+		};
+			function removeComplete(xhr,status){
+				if(status!="success"){
+	                alert("error sending request");
+	                return;
+	            }
+	            var obj=JSON.parse(xhr.responseText);
+	            if(obj.result==0){
+	                alert(obj.message);
+	            }else{
+	                alert("Booking removed");
+	                }
+	            window.location="admin.html";
+	        }
+		
 		</script>
 	</body>
 </html>
