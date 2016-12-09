@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9vMGnGG0QHDZEWiFLkBvL5a54nDmav8c&libraries=places"></script>
+    <script type="text/javascript">
+      function downloadUrl(url,callback) {
+        var request = window.ActiveXObject ?
+        new ActiveXObject('Microsoft.XMLHTTP') :
+        new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+          request.onreadystatechange = 'doNothing';
+          callback(request, request.status);
+            }
+          };
+        request.open('GET', url, true);
+        request.send(null);
+        }
+      downloadUrl('http://52.89.116.249/~sylvia.engmann/theplacefinder/places1.php', function(data) {
+        var xml = data.responseXML;
+        var markers = xml.documentElement.getElementsByTagName('marker');
+        Array.prototype.forEach.call(markers, function(markerElem) {
+        var name = markerElem.getAttribute('name');
+        var address = markerElem.getAttribute('address');
+        var type = markerElem.getAttribute('type');
+        var point = new google.maps.LatLng(
+            parseFloat(markerElem.getAttribute('lat')),
+            parseFloat(markerElem.getAttribute('lng')));
+        var map= new google.maps.Map(document.getElementById('map'),{
+            center: point,
+            zoom:10,
+            scrollwheel: false
+        });
+        var infowincontent = document.createElement('div');
+        var strong = document.createElement('strong');
+          strong.textContent = name
+          infowincontent.appendChild(strong);
+          infowincontent.appendChild(document.createElement('br'));
+
+        var text = document.createElement('text');
+        text.textContent = address
+        infowincontent.appendChild(text);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: point,
+          });
+        marker.addListener('click', function() {
+        infoWindow.setContent(infowincontent);
+        infoWindow.open(map, marker);
+        });
+      });
+      });
+google.maps.event.addDomListener(window, 'load');
+</script>
+</head>
+<body>
+    <div id="map" style= "height :85%; width:100%;"></div>
+    <div data-role="footer" class="ui-content">
+      <a href="admin.html" data-role="button" data-icon="back">Back</a></div>
+
+</body>
+</html>

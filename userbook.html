@@ -44,7 +44,8 @@
 				<label for="datein">Date-in:</label>
 				<input type="date" data-role="date" id="datein" data-inline="true">
 				<input type="number" name="numdays" id="numdays" placeholder="Number of Days to spend"/>
-				<button onclick="inviteContacts()" data-inline="true" data-theme="b">Invite A Contact</button>
+				<!--<button onclick="inviteContacts()" data-inline="true" data-theme="b">Invite A Contact</button>-->
+				<button id="share">Invite Contacts</button>
 				<button onclick="hotelBook()" data-inline="true" data-theme="b">Make your booking</button>
 				</form>
 				</div><!-- /content -->
@@ -70,34 +71,9 @@
 
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+		<script src="scripts/index.js"></script>
 		<script type="text/javascript" src="scripts/platformOverrides.js"></script>
 		<script type="text/javascript">
-		function inviteContacts(){
-			document.addEventListener("deviceready", onDeviceReady.bind(this),false);
-			function onDeviceReady() {
-			console.log(navigator.contacts);
-			var options = new ContactFindOptions();
-			options.filter = "*";
-			options.multiple = true;
-			options.desiredFields = [navigator.contacts.fieldType.id];
-			options.hasPhoneNumber = true;
-			var fields= [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.phoneNumber];
-			
-		navigator.contacts.find(fields,onSuccess,onError,options);
-		navigator.contacts.pickContact(function(contact){
-        	console.log('The following contact has been selected:' + JSON.stringify(contact));},function(err){console.log('Error: ' + err);});
-			}
-			var contactArray = [];
-			function onSuccess(contacts){
-			for (var i=0; i<contacts.length; i++) {
-        		if (contacts[i].displayName) {
-            		contactArray.push(contacts[i]);
-            	}}
-                alert(contactArray);}
-			function onError(contactError){
-				alert('Error finding contacts');};
-			}
-
         function hotelBookComplete(xhr,status){
                 if(status!="success"){
                divStatus.innerHTML="error while adding user";
