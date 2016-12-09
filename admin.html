@@ -35,6 +35,7 @@
 		<div data-role="content" style="background:#80cbc4">
 			<h1 class="mc-text-center" style="font-family:'Tangerine',serif; font-size:48px;text-shadow: 4px 4px 4px #aaa;">Welcome Admin!</h1>
 				<button><a href="#addPlace">Add A Place</a></button>
+				<button><a href="map1.html">View Added Place</a></button>
 				<button><a href="#viewBankRequest">View ATM Requests</a></button>
 				<button><a href="#viewHotelBookings">View Bookings</a></button>
 			</div><!-- /content -->
@@ -101,7 +102,7 @@
 			<p2 style="font-family:'Aref+Ruqaa',serif; font-size:15px;"> Approved </p2>
 			</div><!-- /content -->
 			</div><!-- /page -->
-
+			
 		<script src="scripts/jquery.js"></script>
 		<script src="scripts/jquery.mobile-1.4.5.min.js"></script>
 		<script src="scripts/platformOverrides.js"></script>
@@ -149,7 +150,7 @@
               var length=obj.atmrequest.length;
 
               while(length>0){
-                  result+="<p>ATM Request Details: "+atmrequest[length-1].bank+"<span>"+atmrequest[length-1].firstname+" "+atmrequest[length-1].lastname+'</span>'+atmrequest[length-1].acnum+"</br</p><button><a href ='#approve'>Approve</a></button>";
+                  result+="<p> ATM Request Details: Bank Name:"+atmrequest[length-1].bank+"</br> Name: "+atmrequest[length-1].firstname+"</br>"+atmrequest[length-1].lastname+"</br> Account number : "+atmrequest[length-1].acnum+"</br></p><button><a href ='#approve'>Approve</a></button>";
                 length-=1;
                 }
               }
@@ -181,7 +182,7 @@
               var length=obj.booking.length;
 
               while(length>0){
-                  result+="<p>Booking Details: "+booking[length-1].hotel+"<span>"+booking[length-1].firstname+" "+booking[length-1].lastname+'</span>'+booking[length-1].datein+"</br"+booking[length-1].numdays+"</p><button><a href ='#approve'>Approve</a></button>";
+                  result+="<p> Booking Details: Hotel Name: </br>"+booking[length-1].hotel+"</br> Name: "+booking[length-1].firstname+" "+booking[length-1].lastname+"</br> Date in: "+booking[length-1].datein+"</br> Number of days : "+booking[length-1].numdays+"</br></p><button><a href ='#approve'>Approve</a></button>";
                 length-=1;
                 }
               }
@@ -194,7 +195,6 @@
    			var url ="http://52.89.116.249/~sylvia.engmann/theplacefinder/booking.php?cmd=2";
   			 $.ajax(url,{async:true,complete:getBookRequestComplete});
   			//var url ="booking.php?cmd=2"; 
-                //alert(url);
            } 
 		</script>
 	</body>
